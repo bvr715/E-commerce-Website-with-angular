@@ -1,1 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
+
+*,
+*:after,*:before{
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+:active,:hover,:focus{
+  outline: 0 !important;
+  outline-offset: 0;
+}
+a,a:hover{
+text-decoration: none;
+}
+a:hover{
+  color: var(--primary-color);
+}
+ul,ol{
+  margin: 0;
+  padding: 0;
+}
+
+:root{
+  --primary-color:#A82C48;
+  --secondary-color:#43121d;
+  --third-color:#f98168;
+  --white-color:#fff;
+  --text-gray:#555;
+  --black-color:#000;
+  --primary-font:'Robota',sans-serif;
+  --secondary-font:'Quicksand',sans-serif;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+body{
+  font-family: var(--primary-font);
+  font-size: 100%;
+  font-weight: 400;
+}
+::-webkit-scrollbar{
+  width: 0.625rem;
+}
+
+::-webkit-scrollbar-track{
+  background: var(--white-color);
+}
+::-webkit-scrollbar-thumb{
+  background: var(--primary-color);
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

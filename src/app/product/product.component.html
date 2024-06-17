@@ -1,0 +1,100 @@
+<div class="container mt-5">
+  <div class="card p-5">
+    <div class="row">
+      <div class="col-md-6">
+        <form #productform="ngForm" (ngSubmit)="addProduct(productform)">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Product Name</mat-label>
+            <input
+              matInput
+              placeholder="Product Name"
+              [(ngModel)]="product.productName"
+              name="productName"
+            />
+            <mat-icon matSuffix></mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Product Description</mat-label>
+            <input
+              matInput
+              placeholder="Product Description"
+              [(ngModel)]="product.productDescription"
+              name="productDescription"
+            />
+            <mat-icon matSuffix></mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Product ActualPrice</mat-label>
+            <input
+              matInput
+              placeholder="Product ActualPrice"
+              [(ngModel)]="product.prodcutActualPrice"
+              name="prodcutActualPrice"
+            />
+            <mat-icon matSuffix></mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Product DiscountPrice</mat-label>
+            <input
+              matInput
+              placeholder="Product DiscountPrice"
+              [(ngModel)]="product.productDiscountPrice"
+              name="productDiscountPrice"
+            />
+            <mat-icon matSuffix></mat-icon>
+          </mat-form-field>
+          <div align="end">
+            <button
+            type="button"
+              mat-stroked-button
+              color="primary"
+              class="m-2"
+              (click)="clear(productform)"
+            >
+              Clear
+            </button>
+            <button type="submit" mat-stroked-button color="accent">
+              Add Product
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <div>
+          <div class="dropzone" appDrag (files)="fileDropped($event)">
+            <div class="text-wrapper">
+              <div class="centered">
+                Drag and drop your file or
+                <a (click)="seletedfile.click()" class="browse-button">
+                  browse</a
+                >
+                a file
+              </div>
+            </div>
+          </div>
+          <input
+            style="display: none"
+            type="file"
+            multiple
+            value="select"
+            #seletedfile
+            (change)="OnSelectedFile($event)"
+          />
+        </div>
+        <div class="mt-5">
+          <div class="row">
+            <div
+              class="col-md-4"
+              *ngFor="let image of product.productImage; let i = index"
+            >
+              <div style="position: relative">
+                <span class="btn-remove-image" (click)="removeImg(i)">X</span>
+                <img class="pro-img img-fluid" [src]="image.url" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

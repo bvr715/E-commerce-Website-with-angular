@@ -1,0 +1,117 @@
+
+<section class="m-5">
+  <div>
+    <form
+    #searchForm="ngForm"
+    (ngSubmit)="gotToPage(searchForm.value.name)"
+    class="d-flex"
+    role="search"
+  >
+    <input
+      type="search"
+      name="name"
+      ngModel
+      class="form-control me-2"
+      placeholder="Search Products"
+      aria-label="Search"
+    />
+    <button class="btn btn-success" type="submit">Search</button>
+  </form>
+  </div>
+</section>
+
+<div class="text-center text-info">
+  <h1 >
+    showing {{ noOfElementsPerPage }} from {{ totalElements }}</h1
+  >
+</div>
+
+<section>
+<div class="py-3">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Discount Price</th>
+        <th scope="col">Actual Price</th>
+        <th scope="col">Images</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let products of allProducts">
+      <tr>
+        <th scope="row">{{products.product_id}}</th>
+        <td>{{products.productName}}</td>
+        <td>{{products.productDescription}}</td>
+        <td>{{products.productDiscountPrice}}</td>
+        <td>{{products.prodcutActualPrice}}</td>
+        <td (click)="ProductImageById(products.product_id)" ><i type="button" data-bs-toggle="modal" data-bs-target="#imageModal" class="fa-solid fa-image text-info" style="cursor: pointer;"></i></td>
+        <td  (click)="updateProductById(products.product_id)"><i  class="fa-solid fa-pen-to-square text-primary"style="cursor: pointer;"></i></td>
+        <td (click)="deleteProductById(products.product_id)"><i class="fa-solid fa-trash text-danger"style="cursor: pointer;"></i></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <nav  aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+      <li
+        class="page-item pointer"
+        [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''"
+      >
+        <a
+          (click)="goToNextOrPreviousPage('backward', searchForm.value.name)"
+          class="page-link"
+          aria-label="Previous"
+        >
+          <span aria-hidden="true">&laquo; Previous</span>
+        </a>
+      </li>
+      <li
+        *ngFor="let pageNumber of [].constructor(totalPages); let i = index"
+        class="page-item pointer"
+        [ngClass]="i == (currentPage$ | async) ? ' active' : ''"
+      >
+        <a (click)="gotToPage(searchForm.value.name, i)" class="page-link">
+          {{ i + 1 }}
+        </a>
+      </li>
+      <li
+        class="page-item pointer"
+        [ngClass]="
+          totalPages - 1 == (currentPage$ | async) ? ' disabled' : ''
+        "
+      >
+        <a
+          (click)="goToNextOrPreviousPage('forward', searchForm.value.name)"
+          class="page-link"
+          aria-label="Next"
+        >
+          <span aria-hidden="true">Next &raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+</section>
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header justify-content-end align-content-end text-end">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <i class="fa-solid fa-x"></i>
+        </button>
+      </div>
+      <div class="modal-body" *ngFor="let image of transformedProducts">
+          <img class="pro-img" style="width: 200px;" [src]="image.productImage[0].url" alt="" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

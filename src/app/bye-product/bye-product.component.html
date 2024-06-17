@@ -1,0 +1,100 @@
+<section class="mt-5">
+  <div class="container">
+    <div class="card">
+      <div class="row">
+        <div class="col-6 m-2">
+          <form #orderForm="ngForm" (ngSubmit)="placeOrder(orderForm)">
+            <div class="mt-2">
+              <label for="inputPassword5" class="form-label">Full Name</label>
+              <input
+                placeholder="Enter FullName"
+                type="text"
+                id="inputPassword5"
+                name="fullName"
+                [(ngModel)]="orderDetails.fullName"
+                class="form-control"
+                aria-describedby="passwordHelpBlock"
+              />
+            </div>
+            <div class="mt-2">
+              <label for="inputPassword5" class="form-label">Full Address</label>
+              <input
+                placeholder="Enter Full Address"
+                type="text"
+                id="inputPassword5"
+                name="fullAddress"
+                [(ngModel)]="orderDetails.fullAddress"
+                class="form-control"
+                aria-describedby="passwordHelpBlock"
+              />
+            </div>
+            <div class="mt-2">
+              <label for="inputPassword5" class="form-label">Contact Number</label>
+              <input
+                placeholder=" Enter Contact Number"
+                type="text"
+                id="inputPassword5"
+                name="contactNumber"
+                [(ngModel)]="orderDetails.contactNumber"
+                class="form-control"
+                aria-describedby="passwordHelpBlock"
+              />
+            </div>
+            <div class="mt-2">
+              <label for="inputPassword5" class="form-label">Alternate Contact Number</label>
+              <input
+                placeholder="Enter Alternate Contact Number"
+                type="text"
+                id="inputPassword5"
+                name="alternateContactNumber"
+                [(ngModel)]="orderDetails.alternateContactNumber"
+                class="form-control"
+                aria-describedby="passwordHelpBlock"
+              />
+            </div>
+            <div class=" text-end m-2">
+              <button class="btn btn-outline-success" type="submit">Order now</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-5">
+          <table class="table">
+            <thead class="thead">
+              <tr>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Quantity</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody class="tbody">
+              <tr *ngFor="let product of productDetails">
+                <td>{{product.productName}}</td>
+                <td>{{product.productDescription}}</td>
+                <td>
+                  <select
+                   class="form-select"
+                   [ngModel]="getQuantityForProduct(product.product_id)"
+                   #quantity
+                   (change)="onQuantityChange(quantity.value,product.product_id)"
+                   >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </td>
+                <td>{{getCalculatedTotal(product.product_id,product.productDiscountPrice)}}</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>Total</td>
+                <td>{{getCalculatedGradTotal()}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

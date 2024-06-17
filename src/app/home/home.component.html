@@ -1,0 +1,27 @@
+<section class="py-5">
+  <div class="container">
+    <div class="row g-3">
+      <div
+        class="col-md-3 p-2 position-relative"
+        *ngFor="let product of finalarry"
+      >
+        <img [src]="product.productImage[0].url" alt="" class="img-fluid" />
+        <div class="" >
+          <p style="font-weight: 600; color: green;">{{ product.productName }}</p>
+        </div>
+        <div class="" >
+          <p style="font-weight: 600; color: green;">RS. <span class="text-decoration-line-through" style="color: red;">{{ product.prodcutActualPrice }}</span> {{ product.productDiscountPrice }}</p>
+        </div>
+        <div class="" >
+         <p> {{ product.productDescription }} </p>
+        </div>
+        <div class="" >
+         <button class="btn btn-info" type="button" (click)="viewProductDetails(product.product_id)">View</button>
+         </div>
+      </div>
+    </div>
+    <div *ngIf="loadbutton" class="mt-3 text-center">
+      <button class="btn btn-outline-success px-5" (click)="loadMore()">Load more</button>
+    </div>
+  </div>
+</section>
